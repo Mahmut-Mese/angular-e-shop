@@ -1,0 +1,37 @@
+<app-navbar></app-navbar>
+<div class="container pt-5 mt-5">
+    <div class="row">
+        <div class="col-3">
+            <app-cart-summary></app-cart-summary>
+            <app-category-list (category)="getCategory($event)"></app-category-list>
+        </div>
+        <div class="col-9">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert-warning alert">
+                        <div class="form-inline float-right m-0 p-0">
+                            <select class="form-control-sm" [value]="productsPerPage" (change)="changePageSize($event.target.value)">
+                <option value="2">2 tane</option>
+                <option value="3">3 tane</option>
+                <option value="4">4 tane</option>
+                <option value="5">5 tane</option>
+                <option value="6">6 tane</option>
+              </select>
+                        </div>
+                        {{ selectedProducts.length }} ürün bulundu.
+                    </div>
+                </div>
+                <app-product-list [products]="products"></app-product-list>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <div class="btn-group">
+                        <button class="btn btn-outline-primary" (click)="changePage(page)" *ngFor="let page of pageNumbers" [class.active]="page == selectedPage">
+              {{ page }}
+            </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

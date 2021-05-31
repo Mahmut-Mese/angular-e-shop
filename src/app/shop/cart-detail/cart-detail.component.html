@@ -1,0 +1,68 @@
+<app-navbar></app-navbar>
+<div class="container pt-100 mb-5">
+    <h1 class="mb-2">alışveriş sepetiniz</h1>
+    <div class="row">
+        <div class="col-8">
+            <ng-container *ngIf="cart.itemCount > 0">
+                <table class="table table-hover">
+                    <thead>
+                        <th></th>
+                        <th>ürün</th>
+                        <th>fiyat</th>
+                        <th>miktar</th>
+                        <th>toplam</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of cart.items">
+                            <td>
+                                <img src="assets/img/{{ item.product.imageUrl }}" width="80" alt="" />
+                            </td>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.product.price }}</td>
+                            <td>
+                                <input type="text" value="{{ item.quantity }}" style="width: 50px" (change)="
+                    cart.updateQuantity(item.product, $event.target.value)
+                  " class="form-control" />
+                            </td>
+                            <td>{{ item.quantity * item.product.price }} TL</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" (click)="cart.removeItem(item.product.id)">
+                  <i class="fa fa-times fa-fw"></i>
+                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-container>
+            <ng-container *ngIf="cart.itemCount == 0 || cart.itemCount == null">
+                <div class="alert alert-warning mt-3">
+                    sepetinizde ürün yok <br />
+                    <button routerLink="/shop" class="btn btn-link p-0">
+            alişverişe devam etmek için tıklayınız
+          </button>
+                </div>
+            </ng-container>
+        </div>
+        <div class="col-md-4">
+            <ng-container *ngIf="cart.itemCount > 0">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>toplam</th>
+                            <td>{{ cart.total }} TL</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div>
+                    <button routerLink="/checkout" class="btn btn-primary btn-sm">
+            Alışverişi tamamla
+          </button>
+                    <button routerLink="/shop" class="btn btn-primary btn-sm ml-2">
+            Alışverişe devam et
+          </button>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

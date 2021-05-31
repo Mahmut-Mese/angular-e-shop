@@ -1,0 +1,23 @@
+<table class="table table-hover table-striped">
+    <thead>
+        <th>name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let c of getCategories()">
+
+            <td>{{ c.name }}</td>
+            <td>
+                <button class="btn btn-warning btn-sm" routerLink="edit/{{ c.id }}">
+          edit
+        </button>
+                <button class="btn btn-warning btn-sm" (click)="deleteCategory(c)">
+          delete
+        </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<button class="btn btn-primary btn-sm" routerLink="create">
+  yeni category ekle
+</button>
